@@ -88,7 +88,7 @@ def list_events():
         if user_id == event['user_id'] and start_time <= event['start_time'] and end_time >= event['end_time']:
             result_list.append(event)
 
-    #sort the resulting array such that all event times with start time n appear in the array before those with a start time of n+1
+    #sort the resulting array such that all event times with start time n appear in the array before those with a start time ofclear n+1
     result_list.sort(key=lambda x: x['start_time'])
 
     return jsonify(result_list), 200

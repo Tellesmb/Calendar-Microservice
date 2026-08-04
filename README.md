@@ -225,7 +225,7 @@ The microservice does not handle contextual errors such as mis-matching uppercas
 sequenceDiagram
     actor User
     participant Client as Client Program
-    participant Service as Search Microservice
+    participant Service as Calendar Microservice
 
     Note over User, Client: POST
     User->>Client: Enters event details unformatted (user id, event title, start time, end time)
