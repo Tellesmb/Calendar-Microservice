@@ -49,7 +49,7 @@ def create_event():
     local_db[event_id] = new_event
 
     #return the event and a 201 for status
-    return jsonify(new_event), 201
+    return jsonify(new_event), 200
 
 
 #app.route decorator to match functional requirement spec
