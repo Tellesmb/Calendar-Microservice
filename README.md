@@ -212,6 +212,12 @@ get_response.json()
 
 ## Errors
 
+Invalid requests return a status of 400, or 404 if searching for an event and it is not found.
+
+Errors occur if fields are left blank when when invoking POST, if the object does not exist when invoking GET, and if the start time and end time don't match reality
+
+The microservice does not handle contextual errors such as mis-matching uppercase and lowercase (for example John != joHn), nor does it handle mis-formatting of date time group format and it will not notify the user of such.
+
 ## UML Sequence Diagram
 
 
