@@ -10,7 +10,7 @@ app = Flask(__name__)
 #store events in a dictionary while the service is running
 local_db = {}
 
-#app.route decorator to match functional requirement spec
+#app.route decorator to match functional requirement spec: calendar/events
 @app.route('/calendar/events', methods=['POST'])
 def create_event():
 
@@ -51,8 +51,6 @@ def create_event():
     #return the event and a 201 for status
     return jsonify(new_event), 200
 
-
-#app.route decorator to match functional requirement spec
 @app.route('/calendar/events/<string:event_id>', methods=['GET'])
 def get_event(event_id):
     #provided a event_id return that event
@@ -65,8 +63,6 @@ def get_event(event_id):
     #return the event
     return jsonify(event),200
 
-
-#app.route decorator to match functional requirement spec
 @app.route('/calendar/events', methods=['GET'])
 def list_events():
 
