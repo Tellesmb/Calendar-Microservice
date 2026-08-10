@@ -10,6 +10,22 @@ app = Flask(__name__)
 #store events in a dictionary while the service is running
 local_db = {}
 
+REQUIRED_FIELDS = ['user_id', 'title', 'start_time', 'end_time']
+
+def validate_event_payload(data):
+    # Return an error message if the payload is invalid, otherwise None
+    if not data:
+        return "Invalid or missing JSON"
+
+    for field in REQUIRED_FIELDS:
+        if field not in data:
+            return f"Missing required field: {field}"
+
+    if data['end_time'] <= data['start_time']:
+        return "End time must be later than start"
+
+    return None
+
 #app.route decorator to match functional requirement spec
 @app.route('/calendar/events', methods=['POST'])
 def create_event():
@@ -17,21 +33,9 @@ def create_event():
     #get_json parses the incoming JSON request data and returns it
     data = request.get_json()
     
-    #assert that the data sent exists
-    if not data:
-        return jsonify({"error": "Invalid or missing JSON"}), 400
-
-    #assert the required fields match functional requirement spec
-    #Start time and end time, must be ISO8601 time format YYYY-MM-DDTHH:MM:SS
-    required_fields = ['user_id', 'title', 'start_time', 'end_time']
-
-    for field in required_fields:
-        if field not in data:
-            return jsonify({"error": f"Missing required field: {field}"}), 400
-
-    #assert end time is not before the start time
-    if data['end_time'] <= data['start_time']:
-        return jsonify({"error": "End time must be later than start time"}), 400
+    error = validate_event_payload(data)
+    if error:
+        return jsonify({"error": error}), 400
 
     #generate universal unique ID ensure events with duplicate names times are still unique
     event_id = str(uuid.uuid4())
@@ -49,7 +53,7 @@ def create_event():
     local_db[event_id] = new_event
 
     #return the event and a 201 for status
-    return jsonify(new_event), 200
+    return jsonify(new_event), 201
 
 
 #app.route decorator to match functional requirement spec
