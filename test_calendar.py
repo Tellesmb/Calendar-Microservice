@@ -116,7 +116,7 @@ print("--- Successful GET Event 1 ---")
 #GET the the event by using the unique event id as stored in event_id_list
 get_response = requests.get(url + "/" + event_id_list[0])
 print("Event: ", get_response.json())
-print("Response status is: ", response.status_code)
+print("Response status is: ", get_response.status_code)
 
 
 
@@ -126,7 +126,7 @@ print("--- Successful GET Event 2 ---")
 #GET the the event by using the unique event id as stored in event_id_list
 get_response = requests.get(url + "/" + event_id_list[1])
 print("Event: ", get_response.json())
-print("Response status is: ", response.status_code)
+print("Response status is: ", get_response.status_code)
 
 
 
@@ -135,7 +135,7 @@ print(" --- Successful GET Event 3 --- ")
 #GET the the event by using the unique event id as stored in event_id_list
 get_response = requests.get(url + "/" + event_id_list[2])
 print("Event: ", get_response.json())
-print("Response status is: ", response.status_code)
+print("Response status is: ", get_response.status_code)
 
 
 
@@ -144,7 +144,7 @@ print(" --- Fail to GET --- ")
 #Failure case
 get_response = requests.get(url + "/" + "bad_id")
 print("Event: ", get_response.json())
-print("Response status is: ", response.status_code)
+print("Response status is: ", get_response.status_code)
 
 
 
@@ -156,7 +156,7 @@ print("--- LIST_EVENT ----------------------------------------------------------
 print("Creating params for GET")
 payload = {
     "user_id": "user1",
-    "start_time": "2026-06-01T012:00:00",
+    "start_time": "2026-06-01T12:00:00",
     "end_time": "2026-06-01T18:00:00"
 }
 
